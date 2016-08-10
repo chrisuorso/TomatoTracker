@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="javafxtest" default="all">
+<project name="tomatotracker" default="all">
   
   
-  <property file="javafxtest.properties"/>
+  <property file="tomatotracker.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
   <property name="skip.tests" value="true"/>
@@ -102,92 +102,92 @@
   <!-- Modules -->
   
   
-  <!-- Module JavaFXtest -->
+  <!-- Module TomatoTracker -->
   
-  <dirname property="module.javafxtest.basedir" file="${ant.file}"/>
+  <dirname property="module.tomatotracker.basedir" file="${ant.file}"/>
   
   
-  <property name="module.jdk.home.javafxtest" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.javafxtest" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.javafxtest" value="${project.jdk.classpath}"/>
+  <property name="module.jdk.home.tomatotracker" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.tomatotracker" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.tomatotracker" value="${project.jdk.classpath}"/>
   
-  <property name="compiler.args.javafxtest" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  <property name="compiler.args.tomatotracker" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
   
-  <property name="javafxtest.output.dir" value="${module.javafxtest.basedir}/out/production/JavaFXtest"/>
-  <property name="javafxtest.testoutput.dir" value="${module.javafxtest.basedir}/out/test/JavaFXtest"/>
+  <property name="tomatotracker.output.dir" value="${module.tomatotracker.basedir}/out/production/TomatoTracker"/>
+  <property name="tomatotracker.testoutput.dir" value="${module.tomatotracker.basedir}/out/test/TomatoTracker"/>
   
-  <path id="javafxtest.module.bootclasspath">
+  <path id="tomatotracker.module.bootclasspath">
     <!-- Paths to be included in compilation bootclasspath -->
   </path>
   
-  <path id="javafxtest.module.production.classpath">
-    <path refid="${module.jdk.classpath.javafxtest}"/>
+  <path id="tomatotracker.module.production.classpath">
+    <path refid="${module.jdk.classpath.tomatotracker}"/>
   </path>
   
-  <path id="javafxtest.runtime.production.module.classpath">
-    <pathelement location="${javafxtest.output.dir}"/>
+  <path id="tomatotracker.runtime.production.module.classpath">
+    <pathelement location="${tomatotracker.output.dir}"/>
   </path>
   
-  <path id="javafxtest.module.classpath">
-    <path refid="${module.jdk.classpath.javafxtest}"/>
-    <pathelement location="${javafxtest.output.dir}"/>
+  <path id="tomatotracker.module.classpath">
+    <path refid="${module.jdk.classpath.tomatotracker}"/>
+    <pathelement location="${tomatotracker.output.dir}"/>
   </path>
   
-  <path id="javafxtest.runtime.module.classpath">
-    <pathelement location="${javafxtest.testoutput.dir}"/>
-    <pathelement location="${javafxtest.output.dir}"/>
+  <path id="tomatotracker.runtime.module.classpath">
+    <pathelement location="${tomatotracker.testoutput.dir}"/>
+    <pathelement location="${tomatotracker.output.dir}"/>
   </path>
   
   
-  <patternset id="excluded.from.module.javafxtest">
+  <patternset id="excluded.from.module.tomatotracker">
     <patternset refid="ignored.files"/>
   </patternset>
   
-  <patternset id="excluded.from.compilation.javafxtest">
-    <patternset refid="excluded.from.module.javafxtest"/>
+  <patternset id="excluded.from.compilation.tomatotracker">
+    <patternset refid="excluded.from.module.tomatotracker"/>
   </patternset>
   
-  <path id="javafxtest.module.sourcepath">
-    <dirset dir="${module.javafxtest.basedir}">
+  <path id="tomatotracker.module.sourcepath">
+    <dirset dir="${module.tomatotracker.basedir}">
       <include name="src"/>
     </dirset>
   </path>
   
   
-  <target name="compile.module.javafxtest" depends="compile.module.javafxtest.production,compile.module.javafxtest.tests" description="Compile module JavaFXtest"/>
+  <target name="compile.module.tomatotracker" depends="compile.module.tomatotracker.production,compile.module.tomatotracker.tests" description="Compile module TomatoTracker"/>
   
-  <target name="compile.module.javafxtest.production" depends="register.custom.compilers" description="Compile module JavaFXtest; production classes">
-    <mkdir dir="${javafxtest.output.dir}"/>
-    <javac2 destdir="${javafxtest.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.javafxtest}/javac">
-      <compilerarg line="${compiler.args.javafxtest}"/>
-      <bootclasspath refid="javafxtest.module.bootclasspath"/>
-      <classpath refid="javafxtest.module.production.classpath"/>
-      <src refid="javafxtest.module.sourcepath"/>
-      <patternset refid="excluded.from.compilation.javafxtest"/>
+  <target name="compile.module.tomatotracker.production" depends="register.custom.compilers" description="Compile module TomatoTracker; production classes">
+    <mkdir dir="${tomatotracker.output.dir}"/>
+    <javac2 destdir="${tomatotracker.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.tomatotracker}/javac">
+      <compilerarg line="${compiler.args.tomatotracker}"/>
+      <bootclasspath refid="tomatotracker.module.bootclasspath"/>
+      <classpath refid="tomatotracker.module.production.classpath"/>
+      <src refid="tomatotracker.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.tomatotracker"/>
     </javac2>
     
-    <copy todir="${javafxtest.output.dir}">
-      <fileset dir="${module.javafxtest.basedir}/src">
+    <copy todir="${tomatotracker.output.dir}">
+      <fileset dir="${module.tomatotracker.basedir}/src">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
       </fileset>
     </copy>
   </target>
   
-  <target name="compile.module.javafxtest.tests" depends="register.custom.compilers,compile.module.javafxtest.production" description="compile module JavaFXtest; test classes" unless="skip.tests"/>
+  <target name="compile.module.tomatotracker.tests" depends="register.custom.compilers,compile.module.tomatotracker.production" description="compile module TomatoTracker; test classes" unless="skip.tests"/>
   
-  <target name="clean.module.javafxtest" description="cleanup module">
-    <delete dir="${javafxtest.output.dir}"/>
-    <delete dir="${javafxtest.testoutput.dir}"/>
+  <target name="clean.module.tomatotracker" description="cleanup module">
+    <delete dir="${tomatotracker.output.dir}"/>
+    <delete dir="${tomatotracker.testoutput.dir}"/>
   </target>
   
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
   </target>
   
-  <target name="clean" depends="clean.module.javafxtest, clean.artifact.javafxapp" description="cleanup all"/>
+  <target name="clean" depends="clean.module.tomatotracker, clean.artifact.javafxapp" description="cleanup all"/>
   
-  <target name="build.modules" depends="init, clean, compile.module.javafxtest" description="build all modules"/>
+  <target name="build.modules" depends="init, clean, compile.module.tomatotracker" description="build all modules"/>
   
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
@@ -201,10 +201,10 @@
     <delete dir="${artifact.output.javafxapp}"/>
   </target>
   
-  <target name="artifact.javafxapp" depends="init.artifacts, compile.module.javafxtest" description="Build &#39;JavaFXApp&#39; artifact" xmlns:fx="javafx:com.sun.javafx.tools.ant">
+  <target name="artifact.javafxapp" depends="init.artifacts, compile.module.tomatotracker" description="Build &#39;JavaFXApp&#39; artifact" xmlns:fx="javafx:com.sun.javafx.tools.ant">
     <mkdir dir="${artifact.output.javafxapp}"/>
     <copy todir="${artifact.temp.output.JavaFXApp}">
-      <fileset dir="${javafxtest.output.dir}"/>
+      <fileset dir="${tomatotracker.output.dir}"/>
     </copy>
     <fx:fileset id="all_but_JavaFXApp" dir="${artifact.temp.output.JavaFXApp}" includes="**/*.jar">
       <exclude name="JavaFXApp.jar"/>
