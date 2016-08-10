@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100"
+   height="100"
+   id="svg3080"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="hollowPlus.svg"
+   inkscape:export-filename="/home/c/GitHub/todoapp/JavaFXtest/src/PomodoroTimer/com.culshoefer.fuzzytesting.culshoefer.tomatotracker.resources/svg/hollowPlus.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3082" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="8"
+     inkscape:cx="26.852017"
+     inkscape:cy="54.202338"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1025"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3085">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-952.36218)">
+    <rect
+       style="fill:#bbbbbf;fill-opacity:0.94117647;stroke:none"
+       id="rect3885"
+       width="2.5"
+       height="0.125"
+       x="-67.375"
+       y="-6.2499995"
+       transform="translate(0,952.36218)" />
+    <path
+       style="fill:#bbbbbf;fill-opacity:0.94117647;stroke:none"
+       d="m 40,967.36218 0,17.6875 c 2.943904,-1.70514 6.353163,-2.6875 10,-2.6875 3.646837,0 7.056096,0.98236 10,2.6875 l 0,-17.6875 -20,0 z m -25,25 0,20.00002 17.6875,0 c -1.70514,-2.9439 -2.6875,-6.3532 -2.6875,-10 0,-3.64686 0.98236,-7.05612 2.6875,-10.00002 l -17.6875,0 z m 52.3125,0 c 1.70514,2.9439 2.6875,6.35316 2.6875,10.00002 0,3.6468 -0.98236,7.0561 -2.6875,10 l 17.6875,0 0,-20.00002 -17.6875,0 z M 40,1019.6747 l 0,17.6875 20,0 0,-17.6875 c -2.943904,1.7051 -6.353163,2.6875 -10,2.6875 -3.646837,0 -7.056096,-0.9824 -10,-2.6875 z"
+       id="rect3883"
+       inkscape:connector-curvature="0" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3950"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#bbbbbf;fill-opacity:0.94117647;stroke:none;font-family:Sans"
+       transform="matrix(1.5061285,0,0,1.5061285,-2.6075355,959.82869)"><flowRegion
+         id="flowRegion3952"><rect
+           id="rect3954"
+           width="49.875"
+           height="41.375"
+           x="9.625"
+           y="8.75"
+           style="font-size:16px;fill:#bbbbbf;fill-opacity:0.94117647" /></flowRegion><flowPara
+         id="flowPara3956"
+         style="text-align:center;line-height:200%;text-anchor:middle;fill:#bbbbbf;fill-opacity:0.94117647">30</flowPara></flowRoot>  </g>
+</svg>

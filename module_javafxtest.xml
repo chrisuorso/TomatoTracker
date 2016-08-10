@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_javafxtest" default="compile.module.javafxtest">
+  <dirname property="module.javafxtest.basedir" file="${ant.file.module_javafxtest}"/>
+  
+  <property name="module.jdk.home.javafxtest" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.javafxtest" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.javafxtest" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.javafxtest" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="javafxtest.output.dir" value="${module.javafxtest.basedir}/out/production/JavaFXtest"/>
+  <property name="javafxtest.testoutput.dir" value="${module.javafxtest.basedir}/out/test/JavaFXtest"/>
+  
+  <path id="javafxtest.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="javafxtest.module.production.classpath">
+    <path refid="${module.jdk.classpath.javafxtest}"/>
+  </path>
+  
+  <path id="javafxtest.runtime.production.module.classpath">
+    <pathelement location="${javafxtest.output.dir}"/>
+  </path>
+  
+  <path id="javafxtest.module.classpath">
+    <path refid="${module.jdk.classpath.javafxtest}"/>
+    <pathelement location="${javafxtest.output.dir}"/>
+  </path>
+  
+  <path id="javafxtest.runtime.module.classpath">
+    <pathelement location="${javafxtest.testoutput.dir}"/>
+    <pathelement location="${javafxtest.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.javafxtest">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.javafxtest">
+    <patternset refid="excluded.from.module.javafxtest"/>
+  </patternset>
+  
+  <path id="javafxtest.module.sourcepath">
+    <dirset dir="${module.javafxtest.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.javafxtest" depends="compile.module.javafxtest.production,compile.module.javafxtest.tests" description="Compile module JavaFXtest"/>
+  
+  <target name="compile.module.javafxtest.production" depends="register.custom.compilers" description="Compile module JavaFXtest; production classes">
+    <mkdir dir="${javafxtest.output.dir}"/>
+    <javac2 destdir="${javafxtest.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.javafxtest}/javac">
+      <compilerarg line="${compiler.args.javafxtest}"/>
+      <bootclasspath refid="javafxtest.module.bootclasspath"/>
+      <classpath refid="javafxtest.module.production.classpath"/>
+      <src refid="javafxtest.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.javafxtest"/>
+    </javac2>
+    
+    <copy todir="${javafxtest.output.dir}">
+      <fileset dir="${module.javafxtest.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.javafxtest.tests" depends="register.custom.compilers,compile.module.javafxtest.production" description="compile module JavaFXtest; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.javafxtest" description="cleanup module">
+    <delete dir="${javafxtest.output.dir}"/>
+    <delete dir="${javafxtest.testoutput.dir}"/>
+  </target>
+</project>

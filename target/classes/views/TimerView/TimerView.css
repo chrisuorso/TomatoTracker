@@ -1,0 +1,56 @@
+.root {
+    -fx-background-color: #2A2A2A;
+    -fx-fill: #DDDDDD;
+}
+
+.label {
+    -fx-font-size: 20;
+    -fx-text-fill: #DDDDDD;
+}
+
+#currentTimeLbl {
+    -fx-font-size: 50;
+}
+
+.pomodorobutton {
+    -fx-max-height: 60px;
+    -fx-min-width: 60px;
+    -fx-min-height: 60px;
+    -fx-background-size: 60px 60px;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+}
+
+#playPauseButton {
+    -fx-background-image: url('../../svg/play.png');
+}
+
+#playPauseButtonPause {
+    -fx-background-image: url('../../svg/pause.png');
+}
+
+#skipButton {
+    -fx-background-image: url('../../svg/skip.png');
+}
+
+#extendButton {
+    -fx-background-image: url('../../svg/hollowPlus.png');
+}
+
+#stopButton {
+    -fx-background-image: url('../../svg/stop.png');
+}
+
+.smallPomodoroButton {
+    -fx-max-height: 40px;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-background-size: 40px 40px;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+
+}
+
+#settingsButton {
+    -fx-background-image: url('../../svg/settings.png');
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import PomodoroTimer.SpinnerField.*?>
+
+<TilePane  fx:controller="PomodoroTimer.SettingsController"
+           xmlns:fx="http://javafx.com/fxml"
+          stylesheets="/PomodoroTimer/resources/views/SettingsView/SettingsView.css">
+    <Label>test</Label>
+    <HBox>
+        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
+                                  fx:id="pomodoroWorkMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
+                                  fx:id="pomodoroWorkSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+        <Label>Work time </Label>
+    </HBox>
+    <HBox>
+        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
+                                  fx:id="pomodoroBreakMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
+                                  fx:id="pomodoroBreakSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+        <Label>Break time </Label>
+    </HBox>
+
+</TilePane>
