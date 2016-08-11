@@ -10,13 +10,12 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ObservableValueBase;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 06/07/16.
  */
-public class MinuteSecondSpinner implements ObservableValue<Integer> {
-    private ArrayList<ChangeListener<? super Integer>> listeners;
-    private ArrayList<InvalidationListener> invlisteners;
+public class MinuteSecondSpinner extends ObservableValueBase<Integer> {
     private IntegerSpinnerAutoCommit minuteSpinner;
     private IntegerSpinnerAutoCommit secondsSpinner;
     private IntegerProperty oldMinutesTime;
@@ -33,15 +32,13 @@ public class MinuteSecondSpinner implements ObservableValue<Integer> {
         this.oldSecondsTime = new SimpleIntegerProperty();
         this.minutesTime.setValue(minuteSpinner.getValue());
         this.secondsTime.setValue(secondsSpinner.getValue());
-        this.listeners = new ArrayList<ChangeListener<? super Integer>>();
-        this.invlisteners = new ArrayList<InvalidationListener>();
         minuteSpinner.getValueFactory().setWrapAround(false);
         minuteSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
                 oldMinutesTime.setValue(minutesTime.getValue());
                 minutesTime.setValue(newValue);
-                fireChange(observable);
+                fireValueChangedEvent();
             }
         });
         secondsSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
@@ -49,7 +46,7 @@ public class MinuteSecondSpinner implements ObservableValue<Integer> {
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
                 oldSecondsTime.setValue(secondsTime.getValue());
                 secondsTime.setValue(newValue);
-                fireChange(observable);
+                fireValueChangedEvent();
             }
         });
         secondsSpinner.addListener(new WrapAroundListener() {
@@ -69,55 +66,11 @@ public class MinuteSecondSpinner implements ObservableValue<Integer> {
         return this.getSecondsFromSpinners();
     }
 
-    @Override
-    public void addListener(ChangeListener<? super Integer> listener) {
-        this.listeners.add(listener);
-    }
-
-    @Override
-    public void removeListener(ChangeListener<? super Integer> listener) {
-        this.listeners.remove(listener);
-    }
-
-    @Override
-    public void addListener(InvalidationListener listener) {
-        this.invlisteners.add(listener);
-    }
-
-    @Override
-    public void removeListener(InvalidationListener listener) {
-        this.invlisteners.remove(listener);
-    }
-
-    private void fireInvalid() {
-        for (InvalidationListener invalidListener : this.invlisteners) {
-            invalidListener.invalidated(this);
-        }
-    }
-
-    private void fireChange(ObservableValue<? extends Integer> ov) {
-        Iterator<ChangeListener<? super Integer>> listenerI = this.listeners.iterator();
-        while (listenerI.hasNext()) {
-            ChangeListener changeL = listenerI.next();
-            changeL.changed(this, getSecondsFromOldSpinners(), getSecondsFromSpinners());
-        }
-    }
-
     private Integer getSecondsFromOldSpinners() {
-        try {
-            return oldMinutesTime.getValue() * 60 + oldSecondsTime.getValue();
-        } catch (Exception e) {
-            this.fireInvalid();
-            return null;
-        }
+        return oldMinutesTime.getValue() * 60 + oldSecondsTime.getValue();
     }
 
     private Integer getSecondsFromSpinners() {
-        try {
-            return minutesTime.getValue() * 60 + secondsTime.getValue();
-        } catch (Exception e) {
-            this.fireInvalid();
-            return minuteSpinner.getValue() * 60 + secondsSpinner.getValue();
-        }
+        return minutesTime.getValue() * 60 + secondsTime.getValue();
     }
 }

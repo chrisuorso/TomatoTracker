@@ -2,13 +2,11 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import com.culshoefer.tomatotracker.SwitchButton?>
-<?import com.culshoefer.tomatotracker.shaperow.ShapeRow?>
 
 <!-- TODO change gridpane to somethign better so that the toggle-button does not get cut off -->
-<GridPane fx:controller="com.culshoefer.tomatotracker.PomodoroTimerController"
+<GridPane fx:controller="com.culshoefer.tomatotracker.views.mainscreen.TimerPresenter"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
-          stylesheets="@TimerView.css" minWidth="350">
+          stylesheets="@Timer.css" minWidth="350">
     <VBox>
         <HBox>
             <Label mnemonicParsing="false" alignment="TOP_LEFT" fx:id="currentTimeLbl"/>
@@ -17,10 +15,6 @@
                     onAction="#openSettings" styleClass="smallPomodoroButton"/>
         </HBox>
         <HBox>
-            <SwitchButton GridPane.rowIndex="1" fx:id="playPauseButton" onAction="#toggleTimer" styleClass="pomodorobutton"/>
-            <Button GridPane.rowIndex="1" fx:id="stopButton" onAction="#stopTimer" styleClass="pomodorobutton"/>
-            <Button GridPane.rowIndex="1" fx:id="extendButton" onAction="#extendBreak" styleClass="pomodorobutton"/>
-            <Button GridPane.rowIndex="1" fx:id="skipButton" onAction="#skipBreak" styleClass="pomodorobutton"/>
         </HBox>
     </VBox>
     <!--<ShapeRow/>-->

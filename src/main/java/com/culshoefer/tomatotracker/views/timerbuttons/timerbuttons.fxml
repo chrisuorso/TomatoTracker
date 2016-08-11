@@ -1,0 +1,13 @@
+<?import javafx.scene.layout.AnchorPane?>
+<?import com.culshoefer.tomatotracker.SwitchButton?>
+<?import javafx.scene.control.Button?>
+<AnchorPane fx:controller="com.culshoefer.tomatotracker.views.timerbuttons.TimerButtonsPresenter"
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="@timerbuttons.css">
+
+<SwitchButton fx:id="playPauseButton" onAction="#toggleTimer" styleClass="pomodorobutton"/>
+<Button fx:id="stopButton" onAction="#stopTimer" styleClass="pomodorobutton"/>
+<Button fx:id="extendButton" onAction="#extendBreak" styleClass="pomodorobutton"/>
+<Button fx:id="skipButton" onAction="#skipBreak" styleClass="pomodorobutton"/>
+
+</AnchorPane>

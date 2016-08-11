@@ -17,7 +17,7 @@ import javafx.scene.control.Labeled;
 public class CountdownTimer extends ObservableValueBase<TimerState> {
     private TimeIntegerProperty currentTime;
     private Integer initialTime;
-    public TimerState currentState;
+    private TimerState currentState;
     private Labeled binding;
     private ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(4);
     private ScheduledFuture runningTimer;

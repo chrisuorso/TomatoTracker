@@ -1,7 +1,8 @@
-package com.culshoefer.tomatotracker;
+package com.culshoefer.tomatotracker.views.settings;
 
 
 import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
+import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
 import com.culshoefer.tomatotracker.spinnerfield.IntegerSpinnerAutoCommit;
 import com.culshoefer.tomatotracker.spinnerfield.MinuteSecondSpinner;
 import com.culshoefer.tomatotracker.spinnerfield.PomodoroTimeInputFields;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 18/07/16. TODO backup current
  *         interval times to disk
  */
-public class SettingsController implements Initializable {
+public class SettingsPresenter implements Initializable {
     @FXML
     private IntegerSpinnerAutoCommit pomodoroWorkMinsSpnr;
     @FXML
@@ -34,25 +35,22 @@ public class SettingsController implements Initializable {
     private IntegerSpinnerAutoCommit pomodoroLongBreakSecsSpnr;
     @FXML
     private IntegerSpinnerAutoCommit pomodoroIntervalsSpnr;
-    private PomodoroTimeInputFields timeFields;
-    private Stage stage;
-    private CountdownTimer bt;
+    private PomodoroTimeManager pomodoroTime;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        assert pomodoroWorkMinsSpnr != null : "fx:id\"pomodoroMinsSpnr\" was not injected. check FXML TimerView.fxml";
-        assert pomodoroWorkSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML TimerView.fxml";
-        assert pomodoroShortBreakMinsSpnr != null : "fx:id\"pomodoroMinsSpnr\" was not injected. check FXML TimerView.fxml";
-        assert pomodoroShortBreakSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML TimerView.fxml";
+        assert pomodoroWorkMinsSpnr != null : "fx:id\"pomodoroMinsSpnr\" was not injected. check FXML Timer.fxml";
+        assert pomodoroWorkSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML Timer.fxml";
+        assert pomodoroShortBreakMinsSpnr != null : "fx:id\"pomodoroMinsSpnr\" was not injected. check FXML Timer.fxml";
+        assert pomodoroShortBreakSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML Timer.fxml";
         MinuteSecondSpinner workFields = new MinuteSecondSpinner(pomodoroWorkMinsSpnr, pomodoroWorkSecsSpnr);
         MinuteSecondSpinner shortBreakFields = new MinuteSecondSpinner(pomodoroShortBreakMinsSpnr, pomodoroShortBreakSecsSpnr);
         MinuteSecondSpinner longBreakFields = new MinuteSecondSpinner(pomodoroLongBreakMinsSpnr, pomodoroLongBreakSecsSpnr);
-        assert workFields != null : "fx:id\"workFields\" was not injected. check FXML TimerView.fxml";
+        assert workFields != null : "fx:id\"workFields\" was not injected. check FXML Timer.fxml";
         assert shortBreakFields != null : "fx:id\"breakFields\" was not injected. check FXML " +
-                "TimerView.fxml";
+                "Timer.fxml";
         assert longBreakFields != null : "fx:id\"breakFields\" was not injected. check FXML " +
-                "TimerView.fxml";
-        this.timeFields = new PomodoroTimeInputFields(workFields, shortBreakFields, longBreakFields);
+                "Timer.fxml";
     }
 
     public void init() {

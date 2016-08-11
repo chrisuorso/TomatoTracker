@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValueBase;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 06/07/16.
+ * @deprecated Does too much!
  */
 public class PomodoroTimeInputFields extends ObservableValueBase<Integer> {
     private ArrayList<ChangeListener<? super Integer>> listeners;

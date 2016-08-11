@@ -1,0 +1,28 @@
+.pomodorobutton {
+    -fx-max-height: 60px;
+    -fx-min-width: 60px;
+    -fx-min-height: 60px;
+    -fx-background-size: 60px 60px;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+}
+
+#playPauseButton {
+    -fx-background-image: url('../../../../../../resources/svg/play.png');
+}
+
+#playPauseButtonPause {
+    -fx-background-image: url('../../../../../../resources/svg/pause.png');
+}
+
+#skipButton {
+    -fx-background-image: url('../../../../../../resources/svg/skip.png');
+}
+
+#extendButton {
+    -fx-background-image: url('../../../../../../resources/svg/hollowPlus.png');
+}
+
+#stopButton {
+    -fx-background-image: url('../../../../../../resources/svg/stop.png');
+}
