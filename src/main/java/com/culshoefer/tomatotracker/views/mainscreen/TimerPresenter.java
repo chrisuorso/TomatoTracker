@@ -35,9 +35,12 @@ public class TimerPresenter implements Initializable {
     private Label currentTimeLbl;
     @FXML
     private Button settingsButton;
-    private boolean isSettingsOpen = false;
     @Inject
     private PomodoroIntervalStateManager pim;
+    @Inject
+    private Parent root;
+    @Inject
+    private
     private String workBg, shortPauseBg, longPauseBg;
 
     @Override
@@ -47,14 +50,10 @@ public class TimerPresenter implements Initializable {
         workBg = resources.getString("WORK_BACKGROUND");
         shortPauseBg = resources.getString("SHORTPAUSE_BACKGROUND");
         longPauseBg = resources.getString("LONGPAUSE_BACKGROUND");
-        this.pim.addListener(new ChangeListener<PomodoroState>() {
-            @Override
-            public void changed(ObservableValue<? extends PomodoroState> ov, PomodoroState oldValue, PomodoroState newValue){
-                changeBackgroundToState(newValue);
-            }
-        });
+        this.pim.addListener((ov, oldValue, newValue) -> changeBackgroundToState(newValue));
+        this.pim.addListener((observable, oldValue, newValue) -> intervalsUntilLongBreak = pim.getNumIntervalsUntilLongPause());
+
         //TODO re-add the change-at-break-switch
-        //TODO listen for changes in intervalmanager on the current PomodoroState
     }
 
     @FXML
@@ -77,7 +76,6 @@ public class TimerPresenter implements Initializable {
             stage.setScene(new Scene(root, 400, 200));
             stage.show();
             SettingsPresenter sc = fxmlloader.getController();
-            sc.setSettings(stage, pomodoroTimer);
         } catch (Exception e) {
             // TODO do something more useful here (screw you, checked exceptions!)
             e.printStackTrace();
@@ -96,14 +94,6 @@ public class TimerPresenter implements Initializable {
         }
     }
 
-    public void nowShortBreak() {
-    }
-
-    public void nowLongBreak() {
-    }
-
-    public void nowWork() {
-    }
 
     private void setBackgroundToWebColor(String webColor) {
         this.root.setStyle("-fx-background-color: " + webColor + ";");

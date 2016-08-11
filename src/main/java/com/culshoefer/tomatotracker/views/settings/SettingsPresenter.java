@@ -10,6 +10,8 @@ import com.culshoefer.tomatotracker.spinnerfield.PomodoroTimeInputFields;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.inject.Inject;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -35,7 +37,9 @@ public class SettingsPresenter implements Initializable {
     private IntegerSpinnerAutoCommit pomodoroLongBreakSecsSpnr;
     @FXML
     private IntegerSpinnerAutoCommit pomodoroIntervalsSpnr;
-    private PomodoroTimeManager pomodoroTime;
+
+    @Inject
+    private PomodoroTimeManager ptm;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -46,26 +50,13 @@ public class SettingsPresenter implements Initializable {
         MinuteSecondSpinner workFields = new MinuteSecondSpinner(pomodoroWorkMinsSpnr, pomodoroWorkSecsSpnr);
         MinuteSecondSpinner shortBreakFields = new MinuteSecondSpinner(pomodoroShortBreakMinsSpnr, pomodoroShortBreakSecsSpnr);
         MinuteSecondSpinner longBreakFields = new MinuteSecondSpinner(pomodoroLongBreakMinsSpnr, pomodoroLongBreakSecsSpnr);
-        assert workFields != null : "fx:id\"workFields\" was not injected. check FXML Timer.fxml";
-        assert shortBreakFields != null : "fx:id\"breakFields\" was not injected. check FXML " +
-                "Timer.fxml";
-        assert longBreakFields != null : "fx:id\"breakFields\" was not injected. check FXML " +
-                "Timer.fxml";
     }
 
     public void init() {
-        this.timeFields.addListener(new ChangeListener<Integer>() {
-            @Override
-            public void changed(ObservableValue<? extends Integer> observ, Integer oldV, Integer newV) {
-                //TODO add PomodoroTimerManager class?
-                /*bt.setInitialShortBreakTime(timeFields.getShortBreakTime());
-                bt.setInitialLongBreakTime(timeFields.getLongBreakTime());
-                bt.setInitialWorkTime(newV);*/
-            }
-        });
         pomodoroIntervalsSpnr.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> obv, Integer oldvalue, Integer newValue) {
+                ptm.
                 //bt.setIntervalsUntilLongBreak(newValue);
             }
         });

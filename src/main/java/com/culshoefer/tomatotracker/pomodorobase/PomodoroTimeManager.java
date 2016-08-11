@@ -7,9 +7,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 11/08/16.
  */
@@ -24,41 +21,38 @@ public class PomodoroTimeManager {
     private PomodoroIntervalStateManager pim;
     @Inject
     private CountdownTimer pomodoroTimer;
+
     public PomodoroTimeManager(){
         installListeners();
     }
 
     private void installListeners() {
-        this.pomodoroTimer.addListener(new ChangeListener<TimerState>() {
-            @Override
-            public void changed(ObservableValue<? extends TimerState> ov, TimerState oldValue, TimerState newValue) {
-                if (newValue.equals(TimerState.DONE)) {
-                    goToNextState();
-                    pomodoroTimer.toggle();
-                }
+        this.pomodoroTimer.addListener((ov, oldValue, newValue) -> {
+            if (newValue.equals(TimerState.DONE)) {
+                PomodoroState newState = pim.nextInterval();
+                pomodoroTimer.setInitialTime(intervalTimes.get(newState));
+                pomodoroTimer.toggle();
+            }
+            if (newValue.equals(TimerState.STOPPED)) {
+                pim.setIntervalsGiven(intervalsUntilLongBreak);
+                pomodoroTimer.setInitialTime(intervalTimes.get(PomodoroState.WORK));
             }
         });
-        this.pim.addListener(new ChangeListener<PomodoroState>() {
-            @Override
-            public void changed(ObservableValue<? extends PomodoroState> observable, PomodoroState oldValue, PomodoroState newValue) {
-                pomodoroTimer.setInitialTime();
-            }
-        });
-        //TODO add changelistener to pim
     }
 
-    private void goToNextState() {
-        PomodoroState newState = this.pim.nextInterval();
-        //TODO make use of hashmap to simplify this
-        if (newState.equals(PomodoroState.WORK)) {
-            pomodoroTimer.setInitialTime(this.initialWorkTime);
-            nowWork();
-        } else if (newState.equals(PomodoroState.SHORTBREAK)) {
-            pomodoroTimer.setInitialTime(this.initialShortBreakTime);
-            nowShortBreak();
+    public int getBreakExtension() {
+        return this.breakExtension;
+    }
+
+    public void setInitialTimeForState(PomodoroState pomState, int initialTime) {
+        this.intervalTimes.put(pomState, initialTime);
+    }
+
+    public void setIntervalsUntilLongBreak(int newVal) throws IllegalArgumentException {
+        if(newVal < 0) {
+            throw new IllegalArgumentException("Cannot specify negative intervals");
         } else {
-            pomodoroTimer.setInitialTime(this.initialLongBreakTime);
-            nowLongBreak();
+            this.intervalsUntilLongBreak = newVal;
         }
     }
 }
