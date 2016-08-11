@@ -6,6 +6,8 @@ import com.culshoefer.tomatotracker.countdowntimer.TimerState;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,6 +33,24 @@ public class TimerButtonsPresenter implements Initializable {
         //TODO install changelistener to pim to change buttons when in break
         //TODO listen for changes in current timerstate to account for things
     }
+
+    private void installListeners() {
+        this.pomodoroTimer.addListener(new ChangeListener<TimerState>() {
+            @Override
+            public void changed(ObservableValue<? extends TimerState> ov, TimerState oldValue, TimerState newValue) {
+                if (newValue.equals(TimerState.RUNNING)) {
+                    showPauseButton();
+                } else if (newValue.equals(TimerState.PAUSED)) {
+                    showPlayButton();
+                } else if (newValue.equals(TimerState.DONE)) {
+                    goToNextState();
+                    pomodoroTimer.toggle();
+                }
+            }
+        });
+        //TODO add changelistener to pim
+    }
+
 
     @FXML
     public void skipBreak(ActionEvent actionEvent) {

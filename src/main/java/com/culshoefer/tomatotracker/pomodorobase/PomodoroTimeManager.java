@@ -1,5 +1,6 @@
 package com.culshoefer.tomatotracker.pomodorobase;
 
+import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
 import com.culshoefer.tomatotracker.countdowntimer.TimerState;
 
 import java.util.Map;
@@ -13,39 +14,34 @@ import javafx.beans.value.ObservableValue;
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 11/08/16.
  */
 public class PomodoroTimeManager {
-    private PomodoroIntervalStateManager pim;
+    @Inject
     private Map<PomodoroState, Integer> intervalTimes;
-
-    @Inject
-    private Integer initialWorkTime;
-    @Inject
-    private Integer initialShortBreakTime;
-    @Inject
-    private Integer initialLongBreakTime;
     @Inject
     private Integer intervalsUntilLongBreak;
     @Inject
     private Integer breakExtension;
-
-
-    initialWorkTime = (Integer)resources.getObject("intervalsUntilLongBreak");
-    initialShortBreakTime = (Integer)resources.getObject("initialWorkTime");
-    initialLongBreakTime = (Integer)resources.getObject("initialShortBreakTime");
-    intervalsUntilLongBreak = (Integer)resources.getObject("initialLongBreakTime");
-    breakExtension = (Integer)resources.getObject("breakExtension");
+    @Inject
+    private PomodoroIntervalStateManager pim;
+    @Inject
+    private CountdownTimer pomodoroTimer;
+    public PomodoroTimeManager(){
+        installListeners();
+    }
 
     private void installListeners() {
         this.pomodoroTimer.addListener(new ChangeListener<TimerState>() {
             @Override
             public void changed(ObservableValue<? extends TimerState> ov, TimerState oldValue, TimerState newValue) {
-                if (newValue.equals(TimerState.RUNNING)) {
-                    showPauseButton();
-                } else if (newValue.equals(TimerState.PAUSED)) {
-                    showPlayButton();
-                } else if (newValue.equals(TimerState.DONE)) {
+                if (newValue.equals(TimerState.DONE)) {
                     goToNextState();
                     pomodoroTimer.toggle();
                 }
+            }
+        });
+        this.pim.addListener(new ChangeListener<PomodoroState>() {
+            @Override
+            public void changed(ObservableValue<? extends PomodoroState> observable, PomodoroState oldValue, PomodoroState newValue) {
+                pomodoroTimer.setInitialTime();
             }
         });
         //TODO add changelistener to pim

@@ -15,6 +15,11 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Map<Object, Object> customProperties = new HashMap<>();
+        customProperties.put("initialWorkTime", 1200);
+        customProperties.put("initialShortBreakTime", 300);
+        customProperties.put("initialLongBreakTime", 1200);
+        customProperties.put("intervalsUntilLongBreak", 4);
+        customProperties.put("breakExtension", 30);
         Injector.setConfigurationSource(customProperties::get);
 
         TimerView appView = new TimerView();
