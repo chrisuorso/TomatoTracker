@@ -13,9 +13,12 @@ import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import static com.culshoefer.NullAsserterLogger.assertNotNull;
+
 /**
- * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 18/07/16. TODO backup current
- *         interval times to disk
+ * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 18/07/16.
+ * TODO somehow inject the ptm in here
+ * TODO backup current interval times to disk
  */
 public class SettingsPresenter implements Initializable {
     @FXML
@@ -34,7 +37,7 @@ public class SettingsPresenter implements Initializable {
     private IntegerSpinnerAutoCommit pomodoroIntervalsSpnr;
 
     @Inject
-    private PomodoroTimeManager ptm;
+    private PomodoroTimeManager ptm;//TODO properly inject
 
     private MinuteSecondSpinner workFields, shortBreakFields, longBreakFields;
 
@@ -50,6 +53,10 @@ public class SettingsPresenter implements Initializable {
         assert pomodoroWorkSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML mainscreen.fxml";
         assert pomodoroShortBreakMinsSpnr != null : "fx:id\"pomodoroMinsSpnr\" was not injected. check FXML mainscreen.fxml";
         assert pomodoroShortBreakSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML mainscreen.fxml";
+        assertNotNull(workFields, "workFields");
+        assertNotNull(shortBreakFields, "shortBreakFields");
+        assertNotNull(longBreakFields, "longBreakFields");
+        assertNotNull(ptm, "ptm");
     }
 
     private void createCombinedSpinners() {

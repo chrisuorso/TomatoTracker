@@ -23,5 +23,5 @@
 }
 
 #settingsButton {
-    -fx-background-image: url('../../../../../../resources/svg/settings.png');
+    -fx-background-image: url('../../../../../svg/settings.png');
 }

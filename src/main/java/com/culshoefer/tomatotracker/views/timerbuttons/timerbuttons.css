@@ -8,21 +8,21 @@
 }
 
 #playPauseButton {
-    -fx-background-image: url('../../../../../../resources/svg/play.png');
+    -fx-background-image: url('../../../../../svg/play.png');
 }
 
 #playPauseButtonPause {
-    -fx-background-image: url('../../../../../../resources/svg/pause.png');
+    -fx-background-image: url('../../../../../svg/pause.png');
 }
 
 #skipButton {
-    -fx-background-image: url('../../../../../../resources/svg/skip.png');
+    -fx-background-image: url('../../../../../svg/skip.png');
 }
 
 #extendButton {
-    -fx-background-image: url('../../../../../../resources/svg/hollowPlus.png');
+    -fx-background-image: url('../../../../../svg/hollowPlus.png');
 }
 
 #stopButton {
-    -fx-background-image: url('../../../../../../resources/svg/stop.png');
+    -fx-background-image: url('../../../../../svg/stop.png');
 }

@@ -21,7 +21,7 @@ import static com.culshoefer.NullAsserterLogger.assertNotNull;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 11/08/16.
- * TODO add changelistener to pim
+ * TODO add this to main screen?
  */
 public class TimerButtonsPresenter implements Initializable {
     @FXML

@@ -1,9 +1,12 @@
 package com.culshoefer.tomatotracker.views.mainscreen;
 
+import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
+import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
 import com.culshoefer.tomatotracker.shaperow.IntegerNumberDisplay;
 import com.culshoefer.tomatotracker.views.settings.SettingsPresenter;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroIntervalStateManager;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
+import com.culshoefer.tomatotracker.views.timerbuttons.TimerButtonsView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import static com.culshoefer.NullAsserterLogger.assertNotNull;
@@ -33,13 +37,18 @@ public class TimerPresenter implements Initializable {
     private Label currentTimeLbl;
     @FXML
     private Button settingsButton;
+    @FXML
+    private GridPane screen;
 
     @Inject
     private PomodoroIntervalStateManager pim;
     @Inject
     private IntegerNumberDisplay intervalsUntilLongBreakDisplay;
+    @Inject
+    private TimerButtonsView timerButtonsView;
 
     private String workBg, shortPauseBg, longPauseBg;
+
 
     @Override
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -48,13 +57,11 @@ public class TimerPresenter implements Initializable {
         assertNotNull(pim, "PomodoroIntervalManager");
         //assertNotNull(root, "TimerView");
         assertNotNull(intervalsUntilLongBreakDisplay, "IntegerNumberDisplay");
-        this.pim = new PomodoroIntervalStateManager();
         workBg = resources.getString("WORK_BACKGROUND");
         shortPauseBg = resources.getString("SHORTPAUSE_BACKGROUND");
         longPauseBg = resources.getString("LONGPAUSE_BACKGROUND");
         this.pim.addListener((ov, oldValue, newValue) -> changeBackgroundToState(newValue));
         this.pim.addListener((observable, oldValue, newValue) -> intervalsUntilLongBreakDisplay.displayNum(pim.getNumIntervalsUntilLongPause()));
-
         //TODO re-add the change-at-break-switch
     }
 
@@ -67,12 +74,6 @@ public class TimerPresenter implements Initializable {
             assert res != null : "not properly injected fxml";
             FXMLLoader fxmlloader = new FXMLLoader(res);
             root = fxmlloader.load();
-            /*(Circle c = new Circle();
-            c.setRadius(20);
-            c.setFill(Color.rgb(20, 255, 30));
-            ShapeRow sr = new ShapeRow(c);
-            root.getScene().add(sr);
-            */
             Stage stage = new Stage();
             stage.setTitle("Settings");
             stage.setScene(new Scene(root, 400, 200));
@@ -98,6 +99,6 @@ public class TimerPresenter implements Initializable {
 
 
     private void setBackgroundToWebColor(String webColor) {
-        //this.root.setStyle("-fx-background-color: " + webColor + ";");
+        this.screen.setStyle("-fx-background-color: " + webColor + ";");
     }
 }

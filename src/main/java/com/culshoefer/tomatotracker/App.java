@@ -5,7 +5,10 @@ import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroIntervalStateManager;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
+import com.culshoefer.tomatotracker.shaperow.CircleFactory;
+import com.culshoefer.tomatotracker.shaperow.ShapeRow;
 import com.culshoefer.tomatotracker.views.mainscreen.TimerView;
+import com.culshoefer.tomatotracker.views.timerbuttons.TimerButtonsView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,18 +40,22 @@ public class App extends Application {
         customProperties.put("pomodoroTimer", pomodoroTimer);
 
         PomodoroIntervalStateManager pim = new PomodoroIntervalStateManager();
+        pim.setIntervalsGiven((Integer)customProperties.get("intervalsUntilLongBreak"));
         customProperties.put("pim", pim);
 
         PomodoroTimeManager ptm = new PomodoroTimeManager();
         customProperties.put("ptm", ptm);
 
-        //TODO somehow grant access to mainscreen about its background
+        CircleFactory cf = new CircleFactory();
+        ShapeRow sr = new ShapeRow(cf);
+        customProperties.put("intervalsUntilLongBreakDisplay", sr);
 
-        //TODO inject ShapeRow
+
+        TimerButtonsView timerButtonsView = new TimerButtonsView();
+        customProperties.put("timerButtonsView", timerButtonsView);
 
         Injector.setConfigurationSource(customProperties::get);
 
-        //TODO make sure to set location via super(?)
         TimerView appView = new TimerView();
         Scene scene = new Scene(appView.getView());
         primaryStage.setTitle("TomatoTracker");
