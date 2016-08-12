@@ -1,22 +1,17 @@
 package com.culshoefer.tomatotracker.views.settings;
 
 
-import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
+import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
 import com.culshoefer.tomatotracker.spinnerfield.IntegerSpinnerAutoCommit;
 import com.culshoefer.tomatotracker.spinnerfield.MinuteSecondSpinner;
-import com.culshoefer.tomatotracker.spinnerfield.PomodoroTimeInputFields;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.stage.Stage;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 18/07/16. TODO backup current
@@ -41,30 +36,39 @@ public class SettingsPresenter implements Initializable {
     @Inject
     private PomodoroTimeManager ptm;
 
+    private MinuteSecondSpinner workFields, shortBreakFields, longBreakFields;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        assert pomodoroWorkMinsSpnr != null : "fx:id\"pomodoroMinsSpnr\" was not injected. check FXML Timer.fxml";
-        assert pomodoroWorkSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML Timer.fxml";
-        assert pomodoroShortBreakMinsSpnr != null : "fx:id\"pomodoroMinsSpnr\" was not injected. check FXML Timer.fxml";
-        assert pomodoroShortBreakSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML Timer.fxml";
-        MinuteSecondSpinner workFields = new MinuteSecondSpinner(pomodoroWorkMinsSpnr, pomodoroWorkSecsSpnr);
-        MinuteSecondSpinner shortBreakFields = new MinuteSecondSpinner(pomodoroShortBreakMinsSpnr, pomodoroShortBreakSecsSpnr);
-        MinuteSecondSpinner longBreakFields = new MinuteSecondSpinner(pomodoroLongBreakMinsSpnr, pomodoroLongBreakSecsSpnr);
+        verifyInjection();
+        createCombinedSpinners();
+        installListeners();
     }
 
-    public void init() {
-        pomodoroIntervalsSpnr.valueProperty().addListener(new ChangeListener<Integer>() {
-            @Override
-            public void changed(ObservableValue<? extends Integer> obv, Integer oldvalue, Integer newValue) {
-                ptm.
-                //bt.setIntervalsUntilLongBreak(newValue);
-            }
+    private void verifyInjection() {
+        assert pomodoroWorkMinsSpnr != null : "fx:id\"pomodoroMinsSpnr\" was not injected. check FXML mainscreen.fxml";
+        assert pomodoroWorkSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML mainscreen.fxml";
+        assert pomodoroShortBreakMinsSpnr != null : "fx:id\"pomodoroMinsSpnr\" was not injected. check FXML mainscreen.fxml";
+        assert pomodoroShortBreakSecsSpnr != null : "fx:id\"pomodoroSecsSpnr\" was not injected. check FXML mainscreen.fxml";
+    }
+
+    private void createCombinedSpinners() {
+        workFields = new MinuteSecondSpinner(pomodoroWorkMinsSpnr, pomodoroWorkSecsSpnr);
+        shortBreakFields = new MinuteSecondSpinner(pomodoroShortBreakMinsSpnr, pomodoroShortBreakSecsSpnr);
+        longBreakFields = new MinuteSecondSpinner(pomodoroLongBreakMinsSpnr, pomodoroLongBreakSecsSpnr);
+    }
+
+    public void installListeners() {
+        pomodoroIntervalsSpnr.valueProperty().addListener((obv, oldvalue, newValue) -> ptm.setIntervalsUntilLongBreak(newValue));
+        workFields.addListener((observable, oldValue, newValue) -> {
+            ptm.setInitialTimeForState(PomodoroState.WORK, newValue);
         });
-    }
+        shortBreakFields.addListener((observable, oldValue, newValue) -> {
+            ptm.setInitialTimeForState(PomodoroState.SHORTBREAK, newValue);
+        });
+        longBreakFields.addListener((observable, oldValue, newValue) -> {
+            ptm.setInitialTimeForState(PomodoroState.LONGBREAK, newValue);
+        });
 
-    public void setSettings(Stage stage, CountdownTimer bt) {
-        this.stage = stage;
-        this.bt = bt;
-        this.init();
     }
 }

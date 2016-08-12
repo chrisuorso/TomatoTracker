@@ -3,14 +3,18 @@ package com.culshoefer.tomatotracker.pomodorobase;
 import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
 import com.culshoefer.tomatotracker.countdowntimer.TimerState;
 
+import java.net.URL;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.inject.Inject;
+
+import javafx.fxml.Initializable;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 11/08/16.
  */
-public class PomodoroTimeManager {
+public class PomodoroTimeManager implements Initializable {
     @Inject
     private Map<PomodoroState, Integer> intervalTimes;
     @Inject
@@ -22,7 +26,14 @@ public class PomodoroTimeManager {
     @Inject
     private CountdownTimer pomodoroTimer;
 
-    public PomodoroTimeManager(){
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        assert intervalTimes != null : "PomodoroIntervalTimes not injected properly";
+        assert intervalsUntilLongBreak != null : "IntervalsUntilLongBreak not injected properly";
+        assert breakExtension != null : "BreakExtensionTime not injected properly";
+        assert pim != null : "PomodoroIntervalManager not injected properly";
+        assert pomodoroTimer != null : "CountdownTimer not injected properly";
         installListeners();
     }
 

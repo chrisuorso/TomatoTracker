@@ -43,7 +43,7 @@
     <include name="*.ane"/>
     <include name="*.zip"/>
   </patternset>
-  <patternset id="compiler.com.culshoefer.fuzzytesting.culshoefer.tomatotracker.resources">
+  <patternset id="compiler.com.culshoefer.tomatotracker.resources">
     <exclude name="**/?*.java"/>
     <exclude name="**/?*.form"/>
     <exclude name="**/?*.class"/>

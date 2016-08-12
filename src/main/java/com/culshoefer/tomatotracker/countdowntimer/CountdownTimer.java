@@ -16,25 +16,20 @@ import javafx.scene.control.Labeled;
  */
 public class CountdownTimer extends ObservableValueBase<TimerState> {
     private TimeIntegerProperty currentTime;
-    private Integer initialTime;
+    private Integer initialTime = 0;
     private TimerState currentState;
     private Labeled binding;
     private ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(4);
     private ScheduledFuture runningTimer;
 
-    public CountdownTimer(Labeled binding, Integer initialTime) {
+    public CountdownTimer() {
         verifyThatValidTime(initialTime);
-        this.binding = binding;
         this.runningTimer = null;
         this.currentState = TimerState.STOPPED;
-        this.initialTime = initialTime;
         this.currentTime = new TimeIntegerProperty();
-        this.currentTime.addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observ, Number oldV, Number newV) {
-                binding.textProperty().setValue(currentTime.formatMinutes().getValue());
-            }
-        });
+        if(binding != null) {
+            this.currentTime.addListener((observ, oldV, newV) -> binding.textProperty().setValue(currentTime.formatMinutes().getValue()));
+        }
         this.currentTime.setValue(initialTime);
     }
 
@@ -118,6 +113,10 @@ public class CountdownTimer extends ObservableValueBase<TimerState> {
 
     public Labeled getLabeled() {
         return this.binding;
+    }
+
+    public void setLabelled(Labeled label) {
+        this.binding = label;
     }
 
     public void offsetCurrentTime(int offset) {

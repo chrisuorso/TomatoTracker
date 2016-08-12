@@ -17,6 +17,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
+import static com.culshoefer.NullAsserterLogger.assertNotNull;
+
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 11/08/16.
  * TODO add changelistener to pim
@@ -30,6 +32,7 @@ public class TimerButtonsPresenter implements Initializable {
     private Button extendButton;
     @FXML
     private SwitchButton playPauseButton;
+
     @Inject
     private CountdownTimer pomodoroTimer;
     @Inject
@@ -39,6 +42,13 @@ public class TimerButtonsPresenter implements Initializable {
 
     @Override
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+        assertNotNull(stopButton, "StopButton");
+        assertNotNull(skipButton, "SkipButton");
+        assertNotNull(extendButton, "ExtendButton");
+        assertNotNull(playPauseButton, "PlayPauseButton");
+        assertNotNull(pomodoroTimer, "PomodoroTimer");
+        assertNotNull(pim, "PomodoroIntervalStateManager");
+        assertNotNull(ptm, "PomodoroTimeManager");
         this.hideBreakButtons();
         this.installListeners();
     }
