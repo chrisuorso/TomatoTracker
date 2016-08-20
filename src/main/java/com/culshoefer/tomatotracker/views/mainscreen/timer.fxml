@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 <!-- TODO change gridpane to somethign better so that the toggle-button does not get cut off -->
-<GridPane fx:controller="com.culshoefer.tomatotracker.views.mainscreen.TimerPresenter"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
-          fx:id="screen"
-          stylesheets="@timer.css" minWidth="350">
+
+<GridPane fx:id="screen" alignment="center" hgap="10" minWidth="350" prefHeight="178.0" prefWidth="351.0" stylesheets="@timer.css" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.102-ea" fx:controller="com.culshoefer.tomatotracker.views.mainscreen.TimerPresenter">
     <VBox>
         <HBox>
-            <Label mnemonicParsing="false" alignment="TOP_LEFT" fx:id="currentTimeLbl"/>
+            <Label fx:id="currentTimeLbl" alignment="TOP_LEFT" mnemonicParsing="false"/>
             <Region prefWidth="140" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" alignment="TOP_RIGHT" GridPane.halignment="RIGHT" GridPane.valignment="TOP" fx:id="settingsButton"
-                    onAction="#openSettings" styleClass="smallPomodoroButton"/>
+            <Button fx:id="settingsButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#openSettings" styleClass="smallPomodoroButton" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
         </HBox>
-        <HBox>
+        <HBox fx:id="pomodoroButtons">
         </HBox>
     </VBox>
     <!--<ShapeRow/>-->

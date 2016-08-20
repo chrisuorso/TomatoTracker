@@ -43,9 +43,6 @@ public class App extends Application {
         pim.setIntervalsGiven((Integer)customProperties.get("intervalsUntilLongBreak"));
         customProperties.put("pim", pim);
 
-        PomodoroTimeManager ptm = new PomodoroTimeManager();
-        customProperties.put("ptm", ptm);
-
         CircleFactory cf = new CircleFactory();
         ShapeRow sr = new ShapeRow(cf);
         customProperties.put("intervalsUntilLongBreakDisplay", sr);
@@ -53,6 +50,9 @@ public class App extends Application {
 
         TimerButtonsView timerButtonsView = new TimerButtonsView();
         customProperties.put("timerButtonsView", timerButtonsView);
+        PomodoroTimeManager ptm = new PomodoroTimeManager(intervalTimes, (Integer)customProperties.get("intervalsUntilLongBreak"),
+                (Integer)customProperties.get("breakExtension"), pim, pomodoroTimer);
+        customProperties.put("ptm", ptm);
 
         Injector.setConfigurationSource(customProperties::get);
 

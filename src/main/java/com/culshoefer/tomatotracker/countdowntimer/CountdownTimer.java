@@ -27,9 +27,6 @@ public class CountdownTimer extends ObservableValueBase<TimerState> {
         this.runningTimer = null;
         this.currentState = TimerState.STOPPED;
         this.currentTime = new TimeIntegerProperty();
-        if(binding != null) {
-            this.currentTime.addListener((observ, oldV, newV) -> binding.textProperty().setValue(currentTime.formatMinutes().getValue()));
-        }
         this.currentTime.setValue(initialTime);
     }
 
@@ -117,6 +114,9 @@ public class CountdownTimer extends ObservableValueBase<TimerState> {
 
     public void setLabelled(Labeled label) {
         this.binding = label;
+        if(binding != null) {
+            this.currentTime.addListener((observ, oldV, newV) -> binding.textProperty().setValue(currentTime.formatMinutes().getValue()));
+        }
     }
 
     public void offsetCurrentTime(int offset) {
@@ -137,7 +137,6 @@ public class CountdownTimer extends ObservableValueBase<TimerState> {
         if (this.isCurrentState(TimerState.STOPPED) || this.isCurrentState(TimerState.DONE)) {
             this.start();
         } else {
-            System.out.println("toggling running");
             this.toggleRunning();
         }
     }

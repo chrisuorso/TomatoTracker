@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
@@ -26,9 +27,11 @@ import static com.culshoefer.NullAsserterLogger.assertNotNull;
 
 
 /**
- * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 28/06/16. TODO play sound when break
+ * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 28/06/16.
+ * TODO play sound when break
  *         starts/ends TODO add keyboard shortcuts for controls TODO show amount of finished
  *         pomodoros today
+ * TODO add own node for buttons
  */
 public class TimerPresenter implements Initializable {
     @FXML
@@ -37,6 +40,8 @@ public class TimerPresenter implements Initializable {
     private Button settingsButton;
     @FXML
     private GridPane screen;
+    @FXML
+    private HBox pomodoroButtons;
 
     @Inject
     private PomodoroIntervalStateManager pim;
@@ -62,10 +67,9 @@ public class TimerPresenter implements Initializable {
         longPauseBg = resources.getString("LONGPAUSE_BACKGROUND");
         this.pim.addListener((ov, oldValue, newValue) -> changeBackgroundToState(newValue));
         this.pim.addListener((observable, oldValue, newValue) -> intervalsUntilLongBreakDisplay.displayNum(pim.getNumIntervalsUntilLongPause()));
-
+        this.ptm.pomodoroTimer.setLabelled(currentTimeLbl);
         timerButtonsView.getView().setStyle("-fx-background-color: #FF0000;");
-        this.screen.getChildren().add(timerButtonsView.getView());
-        //TODO re-add the change-at-break-switch
+        this.pomodoroButtons.getChildren().add(timerButtonsView.getView());
     }
 
     @FXML

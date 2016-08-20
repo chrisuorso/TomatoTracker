@@ -3,35 +3,30 @@ package com.culshoefer.tomatotracker.pomodorobase;
 import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
 import com.culshoefer.tomatotracker.countdowntimer.TimerState;
 
-import java.net.URL;
 import java.util.Map;
-import java.util.ResourceBundle;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
-import javafx.fxml.Initializable;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 11/08/16.
  * TODO this class currently is not initailized :( very bad
  */
 public class PomodoroTimeManager {
-    @Inject
     private Map<PomodoroState, Integer> intervalTimes;
-    @Inject
     private Integer intervalsUntilLongBreak;
-    @Inject
     private Integer breakExtension;
-    @Inject
     private PomodoroIntervalStateManager pim;
-    @Inject
-    private CountdownTimer pomodoroTimer;
+    public CountdownTimer pomodoroTimer;//TODO make private
 
+    public PomodoroTimeManager(Map<PomodoroState, Integer> intervalTimes, Integer intervalsUntilLongBreak,
+                               Integer breakExtension, PomodoroIntervalStateManager pim, CountdownTimer pomodoroTimer) {
+        this.setIntervalTimes(intervalTimes);
+        this.setIntervalsUntilLongBreak(intervalsUntilLongBreak);
+        this.setBreakExtension(breakExtension);
+        this.setPomodoroIntervalStateManager(pim);
+        this.setPomodoroTimer(pomodoroTimer);
+        this.init();
+    }
 
-    @PostConstruct
-    public void initialize() {
-        assert intervalTimes != null : "PomodoroIntervalTimes not injected properly";
+    private void init() {
         assert intervalsUntilLongBreak != null : "IntervalsUntilLongBreak not injected properly";
         assert breakExtension != null : "BreakExtensionTime not injected properly";
         assert pim != null : "PomodoroIntervalManager not injected properly";
@@ -68,5 +63,29 @@ public class PomodoroTimeManager {
         } else {
             this.intervalsUntilLongBreak = newVal;
         }
+    }
+
+    public void setIntervalTimes(Map<PomodoroState, Integer> intervalTimes) {
+        this.intervalTimes = intervalTimes;
+    }
+
+    public void setIntervalsUntilLongBreak(Integer intervalsUntilLongBreak) {
+        this.intervalsUntilLongBreak = intervalsUntilLongBreak;
+    }
+
+    public void setBreakExtension(Integer breakExtension) {
+        this.breakExtension = breakExtension;
+    }
+
+    /**
+     * TODO make this more generic
+     * @param pim
+     */
+    public void setPomodoroIntervalStateManager(PomodoroIntervalStateManager pim) {
+        this.pim = pim;
+    }
+
+    public void setPomodoroTimer(CountdownTimer pomodoroTimer) {
+        this.pomodoroTimer = pomodoroTimer;
     }
 }
