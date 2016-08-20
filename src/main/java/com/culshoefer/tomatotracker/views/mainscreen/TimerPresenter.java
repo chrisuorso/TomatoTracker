@@ -1,11 +1,10 @@
 package com.culshoefer.tomatotracker.views.mainscreen;
 
-import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
 import com.culshoefer.tomatotracker.shaperow.IntegerNumberDisplay;
-import com.culshoefer.tomatotracker.views.settings.SettingsPresenter;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroIntervalStateManager;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
+import com.culshoefer.tomatotracker.views.settings.SettingsView;
 import com.culshoefer.tomatotracker.views.timerbuttons.TimerButtonsView;
 
 import java.net.URL;
@@ -15,13 +14,12 @@ import javax.inject.Inject;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
 import static com.culshoefer.NullAsserterLogger.assertNotNull;
@@ -46,6 +44,8 @@ public class TimerPresenter implements Initializable {
     private IntegerNumberDisplay intervalsUntilLongBreakDisplay;
     @Inject
     private TimerButtonsView timerButtonsView;
+    @Inject
+    private PomodoroTimeManager ptm;
 
     private String workBg, shortPauseBg, longPauseBg;
 
@@ -62,15 +62,27 @@ public class TimerPresenter implements Initializable {
         longPauseBg = resources.getString("LONGPAUSE_BACKGROUND");
         this.pim.addListener((ov, oldValue, newValue) -> changeBackgroundToState(newValue));
         this.pim.addListener((observable, oldValue, newValue) -> intervalsUntilLongBreakDisplay.displayNum(pim.getNumIntervalsUntilLongPause()));
+
+        timerButtonsView.getView().setStyle("-fx-background-color: #FF0000;");
+        this.screen.getChildren().add(timerButtonsView.getView());
         //TODO re-add the change-at-break-switch
     }
 
     @FXML
     public void openSettings(ActionEvent actionEvent) {
-        System.out.println("Opening settings...");
-        Parent root;
         try {
-            URL res = getClass().getClassLoader().getResource("com/culshoefer/tomatotracker/views/settings/settingsview.fxml");
+            Stage stage = new Stage();
+            stage.setTitle("TomatoTracker Settings");
+            TilePane newRoot = new TilePane();
+            Scene scene = new Scene(newRoot, 400, 200);
+            SettingsView sv = new SettingsView((f) -> ptm);
+            sv.getViewAsync(newRoot.getChildren()::add);
+            stage.setScene(scene);
+            stage.show();
+            //final String stageCss = getClass().getResource("mainscreen.css").toExternalForm();
+            //scene.getStylesheets().add(stageCss);
+
+            /*URL res = getClass().getClassLoader().getResource("com/culshoefer/tomatotracker/views/settings/settingsview.fxml");
             assert res != null : "not properly injected fxml";
             FXMLLoader fxmlloader = new FXMLLoader(res);
             root = fxmlloader.load();
@@ -78,7 +90,7 @@ public class TimerPresenter implements Initializable {
             stage.setTitle("Settings");
             stage.setScene(new Scene(root, 400, 200));
             stage.show();
-            SettingsPresenter sc = fxmlloader.getController();
+            SettingsPresenter sc = fxmlloader.getController();*/
         } catch (Exception e) {
             // TODO do something more useful here (screw you, checked exceptions!)
             e.printStackTrace();

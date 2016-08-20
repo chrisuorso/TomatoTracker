@@ -1,5 +1,5 @@
 .pomodorobutton {
-    -fx-max-height: 60px;
+    -fx-max-width: 60px;
     -fx-min-width: 60px;
     -fx-min-height: 60px;
     -fx-background-size: 60px 60px;

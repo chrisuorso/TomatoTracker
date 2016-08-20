@@ -43,9 +43,11 @@ public class SettingsPresenter implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("Injected");
         verifyInjection();
         createCombinedSpinners();
         installListeners();
+        System.out.println("Injected");
     }
 
     private void verifyInjection() {
@@ -65,7 +67,7 @@ public class SettingsPresenter implements Initializable {
         longBreakFields = new MinuteSecondSpinner(pomodoroLongBreakMinsSpnr, pomodoroLongBreakSecsSpnr);
     }
 
-    public void installListeners() {
+    private  void installListeners() {
         pomodoroIntervalsSpnr.valueProperty().addListener((obv, oldvalue, newValue) -> ptm.setIntervalsUntilLongBreak(newValue));
         workFields.addListener((observable, oldValue, newValue) -> {
             ptm.setInitialTimeForState(PomodoroState.WORK, newValue);
