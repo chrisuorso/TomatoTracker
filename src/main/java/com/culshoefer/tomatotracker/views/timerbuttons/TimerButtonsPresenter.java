@@ -55,6 +55,7 @@ public class TimerButtonsPresenter implements Initializable {
 
     private void installListeners() {
         this.pomodoroTimer.addListener((ov, oldValue, newValue) -> {
+            System.out.println("New timerstate: " + newValue);
             if (newValue.equals(TimerState.RUNNING)) {
                 showPauseButton();
             } else {
@@ -90,7 +91,6 @@ public class TimerButtonsPresenter implements Initializable {
     @FXML
     public void toggleTimer(ActionEvent actionEvent) {
         pomodoroTimer.toggle();
-        System.out.println("Toggling timer");
     }
 
     private void showPlayButton() {

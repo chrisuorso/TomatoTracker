@@ -7,14 +7,16 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import javafx.fxml.Initializable;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 11/08/16.
+ * TODO this class currently is not initailized :( very bad
  */
-public class PomodoroTimeManager implements Initializable {
+public class PomodoroTimeManager {
     @Inject
     private Map<PomodoroState, Integer> intervalTimes;
     @Inject
@@ -27,14 +29,15 @@ public class PomodoroTimeManager implements Initializable {
     private CountdownTimer pomodoroTimer;
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @PostConstruct
+    public void initialize() {
         assert intervalTimes != null : "PomodoroIntervalTimes not injected properly";
         assert intervalsUntilLongBreak != null : "IntervalsUntilLongBreak not injected properly";
         assert breakExtension != null : "BreakExtensionTime not injected properly";
         assert pim != null : "PomodoroIntervalManager not injected properly";
         assert pomodoroTimer != null : "CountdownTimer not injected properly";
         installListeners();
+        this.pomodoroTimer.setInitialTime(intervalTimes.get(PomodoroState.WORK));
     }
 
     private void installListeners() {
