@@ -116,6 +116,7 @@ public class CountdownTimer extends ObservableValueBase<TimerState> {
         this.binding = label;
         if(binding != null) {
             this.currentTime.addListener((observ, oldV, newV) -> binding.textProperty().setValue(currentTime.formatMinutes().getValue()));
+            binding.textProperty().setValue(currentTime.formatMinutes().getValue());
         }
     }
 

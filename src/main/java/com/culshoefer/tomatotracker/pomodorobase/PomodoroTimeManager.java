@@ -7,7 +7,6 @@ import java.util.Map;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 11/08/16.
- * TODO this class currently is not initailized :( very bad
  */
 public class PomodoroTimeManager {
     private Map<PomodoroState, Integer> intervalTimes;
@@ -55,6 +54,9 @@ public class PomodoroTimeManager {
 
     public void setInitialTimeForState(PomodoroState pomState, int initialTime) {
         this.intervalTimes.put(pomState, initialTime);
+        if(pomState.equals(PomodoroState.WORK) && pomodoroTimer.isCurrentState(TimerState.STOPPED)) {
+            pomodoroTimer.setCurrentTime(initialTime);
+        }
     }
 
     public void setIntervalsUntilLongBreak(int newVal) throws IllegalArgumentException {

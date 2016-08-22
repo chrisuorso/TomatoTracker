@@ -36,7 +36,9 @@ public class App extends Application {
         customProperties.put("intervalsUntilLongBreak", 4);
         customProperties.put("breakExtension", 30);
 
-        CountdownTimer pomodoroTimer = new CountdownTimer();//TODO set option to set the labelled later
+        CountdownTimer pomodoroTimer = new CountdownTimer();
+        pomodoroTimer.setInitialTime(intervalTimes.get(PomodoroState.WORK));
+        pomodoroTimer.setCurrentTime(intervalTimes.get(PomodoroState.WORK));
         customProperties.put("pomodoroTimer", pomodoroTimer);
 
         PomodoroIntervalStateManager pim = new PomodoroIntervalStateManager();

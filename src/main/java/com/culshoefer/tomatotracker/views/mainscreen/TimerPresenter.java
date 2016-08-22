@@ -86,7 +86,7 @@ public class TimerPresenter implements Initializable {
             //final String stageCss = getClass().getResource("mainscreen.css").toExternalForm();
             //scene.getStylesheets().add(stageCss);
 
-            /*URL res = getClass().getClassLoader().getResource("com/culshoefer/tomatotracker/views/settings/settingsview.fxml");
+            /*URL res = getClass().getClassLoader().getResource("com/culshoefer/tomatotracker/views/settings/settings.fxml");
             assert res != null : "not properly injected fxml";
             FXMLLoader fxmlloader = new FXMLLoader(res);
             root = fxmlloader.load();

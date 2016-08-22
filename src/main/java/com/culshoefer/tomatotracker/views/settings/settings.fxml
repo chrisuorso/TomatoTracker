@@ -7,7 +7,7 @@
 
 <TilePane  fx:controller="com.culshoefer.tomatotracker.views.settings.SettingsPresenter"
            xmlns:fx="http://javafx.com/fxml"
-          stylesheets="@settingsview.css">
+          stylesheets="@settings.css">
     <HBox>
         <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
                                   fx:id="pomodoroWorkMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>

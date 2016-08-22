@@ -43,11 +43,9 @@ public class SettingsPresenter implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Injected");
         verifyInjection();
         createCombinedSpinners();
         installListeners();
-        System.out.println("Injected");
     }
 
     private void verifyInjection() {
@@ -78,6 +76,5 @@ public class SettingsPresenter implements Initializable {
         longBreakFields.addListener((observable, oldValue, newValue) -> {
             ptm.setInitialTimeForState(PomodoroState.LONGBREAK, newValue);
         });
-
     }
 }
