@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import com.culshoefer.tomatotracker.spinnerfield.*?>
 
-<TilePane  fx:controller="com.culshoefer.tomatotracker.views.settings.SettingsPresenter"
+<AnchorPane  fx:controller="com.culshoefer.tomatotracker.views.settings.SettingsPresenter"
            xmlns:fx="http://javafx.com/fxml"
           stylesheets="@settings.css">
-    <HBox>
-        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
-                                  fx:id="pomodoroWorkMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
-                                  fx:id="pomodoroWorkSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-        <Label>Work time </Label>
-    </HBox>
-    <HBox>
-        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
-                                  fx:id="pomodoroShortBreakMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
-                                  fx:id="pomodoroShortBreakSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-        <Label>Short Break time </Label>
-    </HBox>
-    <HBox>
-        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
-                                  fx:id="pomodoroLongBreakMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
-                                  fx:id="pomodoroLongBreakSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-        <Label>Long Break time </Label>
-    </HBox>
-    <HBox>
-        <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="10" initialValue="4"
-                                  fx:id="pomodoroIntervalsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-        <Label>Number of intervals until long break</Label>
-    </HBox>
-
-</TilePane>
+    <VBox>
+        <HBox>
+            <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
+                                      fx:id="pomodoroWorkMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+            <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
+                                      fx:id="pomodoroWorkSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+            <Label>Work time </Label>
+        </HBox>
+        <HBox>
+            <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
+                                      fx:id="pomodoroShortBreakMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+            <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
+                                      fx:id="pomodoroShortBreakSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+            <Label>Short Break time </Label>
+        </HBox>
+        <HBox>
+            <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
+                                      fx:id="pomodoroLongBreakMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+            <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
+                                      fx:id="pomodoroLongBreakSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+            <Label>Long Break time </Label>
+        </HBox>
+        <HBox>
+            <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="10" initialValue="4"
+                                      fx:id="pomodoroIntervalsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
+            <Label>Number of intervals until long break</Label>
+        </HBox>
+    </VBox>
+</AnchorPane>

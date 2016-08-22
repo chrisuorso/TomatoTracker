@@ -55,6 +55,7 @@ public class PomodoroTimeManager {
     public void setInitialTimeForState(PomodoroState pomState, int initialTime) {
         this.intervalTimes.put(pomState, initialTime);
         if(pomState.equals(PomodoroState.WORK) && pomodoroTimer.isCurrentState(TimerState.STOPPED)) {
+            pomodoroTimer.setInitialTime(initialTime);
             pomodoroTimer.setCurrentTime(initialTime);
         }
     }

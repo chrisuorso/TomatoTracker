@@ -31,7 +31,7 @@ import static com.culshoefer.NullAsserterLogger.assertNotNull;
  * TODO play sound when break
  *         starts/ends TODO add keyboard shortcuts for controls TODO show amount of finished
  *         pomodoros today
- * TODO add own node for buttons
+ * TODO fix change in width on showing pause buttons (make fix width?)
  */
 public class TimerPresenter implements Initializable {
     @FXML

@@ -17,8 +17,8 @@ import static com.culshoefer.NullAsserterLogger.assertNotNull;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 18/07/16.
- * TODO somehow inject the ptm in here
  * TODO backup current interval times to disk
+ * TODO fix CSS
  */
 public class SettingsPresenter implements Initializable {
     @FXML
@@ -37,7 +37,7 @@ public class SettingsPresenter implements Initializable {
     private IntegerSpinnerAutoCommit pomodoroIntervalsSpnr;
 
     @Inject
-    private PomodoroTimeManager ptm;//TODO properly inject
+    private PomodoroTimeManager ptm;
 
     private MinuteSecondSpinner workFields, shortBreakFields, longBreakFields;
 
