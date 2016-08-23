@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
+
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -81,20 +83,12 @@ public class TimerPresenter implements Initializable {
             Scene scene = new Scene(newRoot, 400, 200);
             SettingsView sv = new SettingsView((f) -> ptm);
             sv.getViewAsync(newRoot.getChildren()::add);
+            ObservableList<String> styles = sv.getView().getStylesheets();
+            for(int i = 0; i < styles.size(); i++){
+                newRoot.getStylesheets().add(styles.get(i));
+            }
             stage.setScene(scene);
             stage.show();
-            //final String stageCss = getClass().getResource("mainscreen.css").toExternalForm();
-            //scene.getStylesheets().add(stageCss);
-
-            /*URL res = getClass().getClassLoader().getResource("com/culshoefer/tomatotracker/views/settings/settings.fxml");
-            assert res != null : "not properly injected fxml";
-            FXMLLoader fxmlloader = new FXMLLoader(res);
-            root = fxmlloader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Settings");
-            stage.setScene(new Scene(root, 400, 200));
-            stage.show();
-            SettingsPresenter sc = fxmlloader.getController();*/
         } catch (Exception e) {
             // TODO do something more useful here (screw you, checked exceptions!)
             e.printStackTrace();

@@ -4,9 +4,10 @@
 <?import javafx.scene.layout.*?>
 <?import com.culshoefer.tomatotracker.spinnerfield.*?>
 
-<AnchorPane  fx:controller="com.culshoefer.tomatotracker.views.settings.SettingsPresenter"
+<AnchorPane
            xmlns:fx="http://javafx.com/fxml"
-          stylesheets="@settings.css">
+           fx:controller="com.culshoefer.tomatotracker.views.settings.SettingsPresenter"
+           stylesheets="@settings.css">
     <VBox>
         <HBox>
             <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
