@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -64,6 +65,8 @@ public class App extends Application {
         //final String stageCss = getClass().getResource("mainscreen.css").toExternalForm();
         //scene.getStylesheets().add(stageCss);
         primaryStage.setScene(scene);
+        primaryStage.setOnHidden(e -> Platform.exit());
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

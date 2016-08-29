@@ -11,14 +11,14 @@
 
 <!-- TODO change gridpane to somethign better so that the toggle-button does not get cut off -->
 
-<GridPane fx:id="screen" alignment="center" hgap="10" minWidth="350" prefHeight="178.0" prefWidth="351.0" stylesheets="@timer.css" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.102-ea" fx:controller="com.culshoefer.tomatotracker.views.mainscreen.TimerPresenter">
-    <VBox>
-        <HBox>
+<GridPane fx:id="screen" alignment="center" hgap="10" stylesheets="@timer.css" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.102-ea" fx:controller="com.culshoefer.tomatotracker.views.mainscreen.TimerPresenter">
+    <VBox prefWidth="300" minWidth="300" minHeight="125">
+        <HBox styleClass="leftIndented">
             <Label fx:id="currentTimeLbl" alignment="TOP_LEFT" mnemonicParsing="false"/>
             <!--<Region prefWidth="140" HBox.hgrow="ALWAYS" />-->
             <Button fx:id="settingsButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#openSettings" styleClass="smallPomodoroButton" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
         </HBox>
-        <HBox fx:id="pomodoroButtons">
+        <HBox fx:id="pomodoroButtons" styleClass="leftIndented">
         </HBox>
     </VBox>
     <!--<ShapeRow/>-->

@@ -25,3 +25,7 @@
 #settingsButton {
     -fx-background-image: url('../../../../../svg/settings.png');
 }
+
+.leftIndented {
+    -fx-padding: 0 0 0 10px;
+}

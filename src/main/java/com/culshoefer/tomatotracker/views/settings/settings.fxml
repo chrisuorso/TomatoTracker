@@ -4,10 +4,10 @@
 <?import javafx.scene.layout.*?>
 <?import com.culshoefer.tomatotracker.spinnerfield.*?>
 
-<AnchorPane
+<GridPane
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.culshoefer.tomatotracker.views.settings.SettingsPresenter"
-           stylesheets="@settings.css">
+       stylesheets="@settings.css">
     <VBox>
         <HBox>
             <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
@@ -36,4 +36,4 @@
             <Label>Number of intervals until long break</Label>
         </HBox>
     </VBox>
-</AnchorPane>
+</GridPane>

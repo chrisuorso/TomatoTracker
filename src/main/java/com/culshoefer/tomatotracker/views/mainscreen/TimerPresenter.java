@@ -6,6 +6,7 @@ import com.culshoefer.tomatotracker.pomodorobase.PomodoroIntervalStateManager;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
 import com.culshoefer.tomatotracker.views.settings.SettingsView;
 import com.culshoefer.tomatotracker.views.timerbuttons.TimerButtonsView;
+import com.sun.scenario.Settings;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 import javax.inject.Inject;
 
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -23,7 +25,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import static com.culshoefer.NullAsserterLogger.assertNotNull;
 
@@ -56,6 +60,9 @@ public class TimerPresenter implements Initializable {
 
     private String workBg, shortPauseBg, longPauseBg;
 
+    private SettingsView sv;
+    private GridPane tp;
+
 
     @Override
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -70,28 +77,37 @@ public class TimerPresenter implements Initializable {
         this.pim.addListener((ov, oldValue, newValue) -> changeBackgroundToState(newValue));
         this.pim.addListener((observable, oldValue, newValue) -> intervalsUntilLongBreakDisplay.displayNum(pim.getNumIntervalsUntilLongPause()));
         this.ptm.pomodoroTimer.setLabelled(currentTimeLbl);
-        timerButtonsView.getView().setStyle("-fx-background-color: #FF0000;");
         this.pomodoroButtons.getChildren().add(timerButtonsView.getView());
     }
 
     @FXML
     public void openSettings(ActionEvent actionEvent) {
-        try {
-            Stage stage = new Stage();
-            stage.setTitle("TomatoTracker Settings");
-            TilePane newRoot = new TilePane();
-            Scene scene = new Scene(newRoot, 400, 200);
-            SettingsView sv = new SettingsView((f) -> ptm);
-            sv.getViewAsync(newRoot.getChildren()::add);
-            ObservableList<String> styles = sv.getView().getStylesheets();
-            for(int i = 0; i < styles.size(); i++){
-                newRoot.getStylesheets().add(styles.get(i));
-            }
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            // TODO do something more useful here (screw you, checked exceptions!)
-            e.printStackTrace();
+        if(sv == null) {
+            createSettingsView();
+            createSettingsWindow();
+        }
+    }
+
+    private void createSettingsWindow() {
+        Scene scene = new Scene(tp, 450, 200);
+        Stage stage = new Stage();
+        stage.setOnCloseRequest(event -> {
+            tp = null;
+            sv = null;
+        });
+        stage.setTitle("TomatoTracker Settings");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void createSettingsView() {
+        tp = new GridPane();
+        sv = new SettingsView((f) -> ptm);
+        sv.getViewAsync(tp.getChildren()::add);
+        ObservableList<String> styles = sv.getView().getStylesheets();
+        for(int i = 0; i < styles.size(); i++){
+            tp.getStylesheets().add(styles.get(i));
         }
     }
 
