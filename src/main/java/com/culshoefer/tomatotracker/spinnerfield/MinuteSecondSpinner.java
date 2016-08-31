@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.value.ObservableValueBase;
+import javafx.scene.control.SpinnerValueFactory;
 
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 06/07/16.
@@ -64,6 +65,11 @@ public class MinuteSecondSpinner extends ObservableValueBase<Integer> {
     @Override
     public Integer getValue() {
         return this.getSecondsFromSpinners();
+    }
+
+    public void setValue(Integer timeInSeconds) {
+        this.minuteSpinner.setValues(0, 59, Math.floorDiv(timeInSeconds, 60));
+        this.secondsSpinner.setValues(0, 59, timeInSeconds % 60);
     }
 
     private Integer getSecondsFromOldSpinners() {

@@ -25,10 +25,11 @@ public class IntegerSpinnerAutoCommit extends SpinnerAutoCommit<Integer> {
 
     public IntegerSpinnerAutoCommit(@NamedArg("min") int min, @NamedArg("max") int max, @NamedArg("initialValue") int initialValue) {
         super(min, max, initialValue);
-        properlyInitiate(min, max, initialValue);
+        setValues(min, max, initialValue);
+        this.setDefaultSettings();
     }
 
-    private void properlyInitiate(int min, int max, int initialValue) {
+    public void setValues(int min, int max, int initialValue) {
         this.min = min;
         this.max = max;
         this.initialValue = initialValue;
@@ -37,12 +38,12 @@ public class IntegerSpinnerAutoCommit extends SpinnerAutoCommit<Integer> {
     }
 
     private void setDefaultSettings() {
+        this.setDefaultValueFormatter();
+        this.setEditable(true);
         SpinnerValueFactory.IntegerSpinnerValueFactory intSpinValFac = new SpinnerValueFactory.IntegerSpinnerValueFactory(
                 min, max, initialValue);
         intSpinValFac.setWrapAround(true);
         this.setValueFactory(intSpinValFac);
-        this.setDefaultValueFormatter();
-        this.setEditable(true);
     }
 
     private UnaryOperator<TextFormatter.Change> getValidNumberFilter() {

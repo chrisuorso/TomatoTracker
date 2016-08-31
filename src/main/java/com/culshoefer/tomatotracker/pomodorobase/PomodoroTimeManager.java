@@ -48,6 +48,10 @@ public class PomodoroTimeManager {
         });
     }
 
+    public Integer getTimeForInterval(PomodoroState pomodoroState) {
+        return intervalTimes.get(pomodoroState);
+    }
+
     public int getBreakExtension() {
         return this.breakExtension;
     }
@@ -68,12 +72,12 @@ public class PomodoroTimeManager {
         }
     }
 
-    public void setIntervalTimes(Map<PomodoroState, Integer> intervalTimes) {
-        this.intervalTimes = intervalTimes;
+    public Integer getIntervalsUntilLongBreak() {
+        return intervalsUntilLongBreak;
     }
 
-    public void setIntervalsUntilLongBreak(Integer intervalsUntilLongBreak) {
-        this.intervalsUntilLongBreak = intervalsUntilLongBreak;
+    public void setIntervalTimes(Map<PomodoroState, Integer> intervalTimes) {
+        this.intervalTimes = intervalTimes;
     }
 
     public void setBreakExtension(Integer breakExtension) {

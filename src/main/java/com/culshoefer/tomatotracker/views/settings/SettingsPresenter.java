@@ -1,6 +1,7 @@
 package com.culshoefer.tomatotracker.views.settings;
 
 
+import com.culshoefer.tomatotracker.pomodorobase.PomodoroIntervalStateManager;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
 import com.culshoefer.tomatotracker.spinnerfield.IntegerSpinnerAutoCommit;
@@ -46,6 +47,14 @@ public class SettingsPresenter implements Initializable {
         verifyInjection();
         createCombinedSpinners();
         installListeners();
+        setTimes();
+    }
+
+    private void setTimes() {
+        workFields.setValue(ptm.getTimeForInterval(PomodoroState.WORK));
+        shortBreakFields.setValue(ptm.getTimeForInterval(PomodoroState.SHORTBREAK));
+        longBreakFields.setValue(ptm.getTimeForInterval(PomodoroState.LONGBREAK));
+        pomodoroIntervalsSpnr.setValues(0, 10, ptm.getIntervalsUntilLongBreak());
     }
 
     private void verifyInjection() {
