@@ -15,7 +15,10 @@ import java.util.Map;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -29,7 +32,7 @@ public class App extends Application {
         Map<Object, Object> customProperties = new HashMap<>();
 
         Map<PomodoroState, Integer> intervalTimes = new HashMap<>();
-        intervalTimes.put(PomodoroState.WORK, 1200);
+        intervalTimes.put(PomodoroState.WORK, 1200);//TODO get this from properties file
         intervalTimes.put(PomodoroState.SHORTBREAK, 300);
         intervalTimes.put(PomodoroState.LONGBREAK, 1200);
         customProperties.put("intervalTimes", intervalTimes);
@@ -62,12 +65,35 @@ public class App extends Application {
         TimerView appView = new TimerView();
         Scene scene = new Scene(appView.getView());
         primaryStage.setTitle("TomatoTracker");
-        //final String stageCss = getClass().getResource("mainscreen.css").toExternalForm();
-        //scene.getStylesheets().add(stageCss);
         primaryStage.setScene(scene);
         primaryStage.setOnHidden(e -> Platform.exit());
         primaryStage.setResizable(false);
         primaryStage.show();
+        setHotkeys(pomodoroTimer, pim, ptm, scene);
+    }
+
+    private void setHotkeys(CountdownTimer pomodoroTimer, PomodoroIntervalStateManager pim, PomodoroTimeManager ptm, Scene scene) {
+        scene.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode() == KeyCode.SPACE) {
+                pomodoroTimer.toggle();
+                keyEvent.consume();
+            }
+            if(keyEvent.getCode() == KeyCode.S) {
+                pomodoroTimer.stop();
+                keyEvent.consume();
+            }
+            if(!pim.getValue().equals(PomodoroState.WORK)) {
+                if (keyEvent.getCode() == KeyCode.E) {
+                    pomodoroTimer.offsetCurrentTime(ptm.getBreakExtension());
+                    keyEvent.consume();
+                }
+                if (keyEvent.getCode() == KeyCode.A) {
+                    pomodoroTimer.stop();
+                    pomodoroTimer.toggle();
+                    keyEvent.consume();
+                }
+            }
+        });
     }
 
     @Override

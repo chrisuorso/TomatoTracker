@@ -16,7 +16,7 @@
         <HBox styleClass="leftIndented">
             <Label fx:id="currentTimeLbl" alignment="TOP_LEFT" mnemonicParsing="false"/>
             <!--<Region prefWidth="140" HBox.hgrow="ALWAYS" />-->
-            <Button fx:id="settingsButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#openSettings" styleClass="smallPomodoroButton" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
+            <Button fx:id="settingsButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#openSettings" styleClass="smallPomodoroButton" GridPane.halignment="RIGHT" GridPane.valignment="TOP"  focusTraversable="false"/>
         </HBox>
         <HBox fx:id="pomodoroButtons" styleClass="leftIndented">
         </HBox>

@@ -1,5 +1,6 @@
 package com.culshoefer.tomatotracker.views.mainscreen;
 
+import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
 import com.culshoefer.tomatotracker.shaperow.IntegerNumberDisplay;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroIntervalStateManager;
@@ -7,6 +8,7 @@ import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
 import com.culshoefer.tomatotracker.views.settings.SettingsView;
 import com.culshoefer.tomatotracker.views.timerbuttons.TimerButtonsView;
 import com.sun.scenario.Settings;
+import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,9 +21,12 @@ import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
@@ -77,7 +82,8 @@ public class TimerPresenter implements Initializable {
         this.pim.addListener((ov, oldValue, newValue) -> changeBackgroundToState(newValue));
         this.pim.addListener((observable, oldValue, newValue) -> intervalsUntilLongBreakDisplay.displayNum(pim.getNumIntervalsUntilLongPause()));
         this.ptm.pomodoroTimer.setLabelled(currentTimeLbl);
-        this.pomodoroButtons.getChildren().add(timerButtonsView.getView());
+        Node timBView = timerButtonsView.getView();
+        this.pomodoroButtons.getChildren().add(timBView);
     }
 
     @FXML
