@@ -1,14 +1,11 @@
 package com.culshoefer.tomatotracker.views.mainscreen;
 
-import com.culshoefer.tomatotracker.countdowntimer.CountdownTimer;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
 import com.culshoefer.tomatotracker.shaperow.IntegerNumberDisplay;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroIntervalStateManager;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
 import com.culshoefer.tomatotracker.views.settings.SettingsView;
 import com.culshoefer.tomatotracker.views.timerbuttons.TimerButtonsView;
-import com.sun.scenario.Settings;
-import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +13,6 @@ import java.util.ResourceBundle;
 import javax.inject.Inject;
 
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -25,14 +21,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import static com.culshoefer.NullAsserterLogger.assertNotNull;
 

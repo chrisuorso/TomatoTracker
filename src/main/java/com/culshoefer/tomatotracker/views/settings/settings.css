@@ -7,3 +7,7 @@
     -fx-font-size: 20;
     -fx-text-fill: #DDDDDD;
 }
+
+.hyperlink {
+    -fx-text-fill: #8888ff;
+}

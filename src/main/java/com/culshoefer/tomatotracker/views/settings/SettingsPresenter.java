@@ -6,13 +6,19 @@ import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
 import com.culshoefer.tomatotracker.spinnerfield.IntegerSpinnerAutoCommit;
 import com.culshoefer.tomatotracker.spinnerfield.MinuteSecondSpinner;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import javafx.application.HostServices;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 
 import static com.culshoefer.NullAsserterLogger.assertNotNull;
 
@@ -36,6 +42,8 @@ public class SettingsPresenter implements Initializable {
     private IntegerSpinnerAutoCommit pomodoroLongBreakSecsSpnr;
     @FXML
     private IntegerSpinnerAutoCommit pomodoroIntervalsSpnr;
+    @FXML
+    private Hyperlink madebyreference;
 
     @Inject
     private PomodoroTimeManager ptm;
@@ -84,6 +92,13 @@ public class SettingsPresenter implements Initializable {
         });
         longBreakFields.addListener((observable, oldValue, newValue) -> {
             ptm.setInitialTimeForState(PomodoroState.LONGBREAK, newValue);
+        });
+        madebyreference.setOnAction(event -> {
+            try {
+                new ProcessBuilder("x-www-browser", "culshoefer.com").start(); //TODO replace with config
+            } catch (IOException e) {
+                //TODO do something more useful here
+            }
         });
     }
 }
