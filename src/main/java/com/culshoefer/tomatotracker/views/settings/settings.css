@@ -4,8 +4,11 @@
 }
 
 .label {
-    -fx-font-size: 20;
     -fx-text-fill: #DDDDDD;
+}
+
+.bigfont {
+    -fx-font-size: 20;
 }
 
 .hyperlink {

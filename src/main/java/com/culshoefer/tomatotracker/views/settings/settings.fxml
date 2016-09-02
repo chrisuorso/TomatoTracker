@@ -15,27 +15,33 @@
                                           fx:id="pomodoroWorkMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
                 <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
                                           fx:id="pomodoroWorkSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-                <Label>Work time </Label>
+                <Label styleClass="bigfont">Work time </Label>
             </HBox>
             <HBox>
                 <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
                                           fx:id="pomodoroShortBreakMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
                 <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
                                           fx:id="pomodoroShortBreakSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-                <Label>Short Break time </Label>
+                <Label styleClass="bigfont">Short Break time </Label>
             </HBox>
             <HBox>
                 <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="60" initialValue="20"
                                           fx:id="pomodoroLongBreakMinsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
                 <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="59" initialValue="0"
                                           fx:id="pomodoroLongBreakSecsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-                <Label>Long Break time </Label>
+                <Label styleClass="bigfont">Long Break time </Label>
             </HBox>
             <HBox>
                 <IntegerSpinnerAutoCommit maxWidth="80" min="0" max="10" initialValue="4"
                                           fx:id="pomodoroIntervalsSpnr"><editable>true</editable></IntegerSpinnerAutoCommit>
-                <Label>Number of intervals until long break</Label>
+                <Label styleClass="bigfont">Number of intervals until long break</Label>
             </HBox>
+        </VBox>
+        <VBox>
+            <Label>Space for go/pause</Label>
+            <Label>S for stop</Label>
+            <Label>E for extending break</Label>
+            <Label>A for skipping breaks (Advance)</Label>
         </VBox>
         <HBox alignment="BOTTOM_CENTER" GridPane.valignment="BOTTOM">
             <Hyperlink fx:id="madebyreference" visited="false">made by culshoefer.com</Hyperlink>
