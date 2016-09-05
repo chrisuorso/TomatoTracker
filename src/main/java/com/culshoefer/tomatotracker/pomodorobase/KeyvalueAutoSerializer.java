@@ -5,6 +5,7 @@ import javax.json.JsonValue;
 /**
  * @author Christoph Ulshoefer <christophsulshoefer@gmail.com> 01/09/16.
  * This class is responsible for JSON-serializing a configuration given to it.
+ * JSONObjects are not supported. This is meant to represent a flat key-value-store thing
  */
 public class KeyvalueAutoSerializer {
     public void put(String key, JsonValue val){

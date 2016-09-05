@@ -38,8 +38,8 @@
             </HBox>
         </VBox>
         <VBox>
-            <Label>Space for go/pause</Label>
-            <Label>S for stop</Label>
+            <Label>Space for go/stop</Label>
+            <Label>S for pause/resume</Label>
             <Label>E for extending break</Label>
             <Label>A for skipping breaks (Advance)</Label>
         </VBox>

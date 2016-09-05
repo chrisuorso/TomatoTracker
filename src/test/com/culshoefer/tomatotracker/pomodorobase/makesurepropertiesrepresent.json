@@ -1,0 +1,11 @@
+{
+  "stringtest": "asdf",
+  "booltrue": true,
+  "boolfalse": false,
+  "floattest": 3.14159,
+  "inttest": 1337,
+  "nulltest": null,
+  "arraytest": [
+    1, 2, 3
+  ]
+}

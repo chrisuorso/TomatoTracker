@@ -7,10 +7,10 @@
             xmlns:fx="http://javafx.com/fxml"
             stylesheets="@timerbuttons.css">
     <HBox>
-        <SwitchButton fx:id="playPauseButton" onAction="#toggleTimer" styleClass="pomodorobutton"/>
-        <Button fx:id="stopButton" onAction="#stopTimer" styleClass="pomodorobutton"/>
-        <Button fx:id="extendButton" onAction="#extendBreak" styleClass="pomodorobutton"/>
-        <Button fx:id="skipButton" onAction="#skipBreak" styleClass="pomodorobutton"/>
+        <SwitchButton fx:id="playPauseButton" onAction="#toggleTimer" styleClass="pomodorobutton" focusTraversable="false"/>
+        <Button fx:id="stopButton" onAction="#stopTimer" styleClass="pomodorobutton" focusTraversable="false"/>
+        <Button fx:id="extendButton" onAction="#extendBreak" styleClass="pomodorobutton" focusTraversable="false"/>
+        <Button fx:id="skipButton" onAction="#skipBreak" styleClass="pomodorobutton" focusTraversable="false"/>
     </HBox>
 
 </AnchorPane>
