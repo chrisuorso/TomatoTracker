@@ -1,7 +1,6 @@
 package com.culshoefer.tomatotracker.views.settings;
 
 
-import com.culshoefer.tomatotracker.pomodorobase.PomodoroIntervalStateManager;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroState;
 import com.culshoefer.tomatotracker.pomodorobase.PomodoroTimeManager;
 import com.culshoefer.tomatotracker.spinnerfield.IntegerSpinnerAutoCommit;
@@ -10,10 +9,13 @@ import com.culshoefer.tomatotracker.spinnerfield.MinuteSecondSpinner;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 import javax.inject.Inject;
 
 import javafx.application.HostServices;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,12 +49,14 @@ public class SettingsPresenter implements Initializable {
 
     @Inject
     private PomodoroTimeManager ptm;
+    private Preferences prefs;
 
     private MinuteSecondSpinner workFields, shortBreakFields, longBreakFields;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         verifyInjection();
+        prefs = Preferences.userRoot();
         createCombinedSpinners();
         installListeners();
         setTimes();
@@ -83,15 +87,21 @@ public class SettingsPresenter implements Initializable {
     }
 
     private  void installListeners() {
-        pomodoroIntervalsSpnr.valueProperty().addListener((obv, oldvalue, newValue) -> ptm.setIntervalsUntilLongBreak(newValue));
+        pomodoroIntervalsSpnr.valueProperty().addListener((obv, oldvalue, newValue) -> {
+            ptm.setIntervalsUntilLongBreak(newValue);
+            prefs.putInt("INTERVALS_UNTIL_LONG_BREAK", newValue);
+        });
         workFields.addListener((observable, oldValue, newValue) -> {
             ptm.setInitialTimeForState(PomodoroState.WORK, newValue);
+            prefs.putInt("WORK_INTERVAL_LENGTH", newValue);
         });
         shortBreakFields.addListener((observable, oldValue, newValue) -> {
             ptm.setInitialTimeForState(PomodoroState.SHORTBREAK, newValue);
+            prefs.putInt("SHORT_BREAK_INTERVAL_LENGTH", newValue);
         });
         longBreakFields.addListener((observable, oldValue, newValue) -> {
             ptm.setInitialTimeForState(PomodoroState.LONGBREAK, newValue);
+            prefs.putInt("LONG_BREAK_INTERVAL_LENGTH", newValue);
         });
         madebyreference.setOnAction(event -> {
             try {

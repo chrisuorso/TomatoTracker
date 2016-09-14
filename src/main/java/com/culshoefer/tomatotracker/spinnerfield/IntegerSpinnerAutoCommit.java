@@ -9,9 +9,14 @@ import java.util.List;
 import java.util.function.UnaryOperator;
 
 import javafx.beans.NamedArg;
+import javafx.beans.property.StringProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.util.converter.IntegerStringConverter;
 
 /**
@@ -27,6 +32,7 @@ public class IntegerSpinnerAutoCommit extends SpinnerAutoCommit<Integer> {
         super(min, max, initialValue);
         setValues(min, max, initialValue);
         this.setDefaultSettings();
+        this.addUpDownArrows();
     }
 
     public void setValues(int min, int max, int initialValue) {
@@ -35,6 +41,17 @@ public class IntegerSpinnerAutoCommit extends SpinnerAutoCommit<Integer> {
         this.initialValue = initialValue;
         this.currentValue = initialValue;
         this.setDefaultSettings();
+    }
+
+    private void addUpDownArrows() {
+        TextField tf = getEditor();
+        tf.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode().equals(KeyCode.DOWN) || keyEvent.getCode().equals(KeyCode.KP_DOWN)) {
+                decrement();
+            } else if (keyEvent.getCode().equals(KeyCode.UP) || keyEvent.getCode().equals(KeyCode.KP_UP)) {
+                increment();
+            }
+        });
     }
 
     private void setDefaultSettings() {

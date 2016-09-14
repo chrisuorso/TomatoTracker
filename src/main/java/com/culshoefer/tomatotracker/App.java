@@ -13,13 +13,10 @@ import com.culshoefer.tomatotracker.views.timerbuttons.TimerButtonsView;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.inject.Inject;
+import java.util.prefs.*;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -28,14 +25,22 @@ import javafx.stage.Stage;
  * TODO extract
  */
 public class App extends Application {
-    private Integer intervalsuntillongbreak = 4;
-    private Integer workintervallength = 1200;
-    private Integer shortbreakintervallength = 300;
-    private Integer longbreakintervallength = 1200;
+    private static final Integer DEFAULT_INTERVALS_UNTIL_LONG_BREAK = 4;
+    private static final Integer DEFAULT_WORK_INTERVAL_LENGTH = 1200;
+    private static final Integer DEFAULT_SHORT_BREAK_INTERVAL_LENGTH = 300;
+    private static final Integer DEFAULT_LONG_BREAK_INTERVAL_LENGTH = 1200;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Map<Object, Object> customProperties = new HashMap<>();
+
+        Preferences prefs = Preferences.userRoot();
+        Integer intervalsuntillongbreak = prefs.getInt("INTERVALS_UNTIL_LONG_BREAK", DEFAULT_INTERVALS_UNTIL_LONG_BREAK);
+        Integer workintervallength = prefs.getInt("WORK_INTERVAL_LENGTH", DEFAULT_WORK_INTERVAL_LENGTH);
+        Integer shortbreakintervallength = prefs.getInt("SHORT_BREAK_INTERVAL_LENGTH", DEFAULT_SHORT_BREAK_INTERVAL_LENGTH);
+        Integer longbreakintervallength = prefs.getInt("LONG_BREAK_INTERVAL_LENGTH", DEFAULT_LONG_BREAK_INTERVAL_LENGTH);
+
+        customProperties.put("prefs", prefs);
 
         Map<PomodoroState, Integer> intervalTimes = new HashMap<>();
         intervalTimes.put(PomodoroState.WORK, workintervallength);//TODO get this from properties file
